@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>PRIMITIVE — 300 untrained neurons drive a robot</title>
+<meta name="description" content="A small primitive of an artificial brain: ~300 neurons, no training, no RL — real-time neural dynamics controlling an e-puck robot to avoid obstacles.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><circle cx='50' cy='50' r='38' fill='%23111114'/><circle cx='50' cy='50' r='30' fill='none' stroke='%23e33229' stroke-width='8'/></svg>">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="gl"></canvas>
+
+<div id="header">
+  <div id="title">PRIMITIVE</div>
+  <div id="subtitle">~300 untrained neurons &middot; no learned policy &middot; no RL &middot; real-time neural dynamics</div>
+</div>
+
+<div id="camframe">
+  <div id="camlabel">&#9702; CAM 01 &mdash; ROBOT POV</div>
+</div>
+
+<div id="console"></div>
+
+<div id="panel">
+  <div class="panel-title">NEURAL ACTIVITY</div>
+  <canvas id="raster" width="248" height="96"></canvas>
+  <div class="panel-title">PROXIMITY SENSORS</div>
+  <canvas id="sensors" width="248" height="52"></canvas>
+  <div class="panel-title">MOTORS</div>
+  <canvas id="motors" width="120" height="64"></canvas>
+  <div id="stats">
+    <div><span>time</span><b id="st-time">00:00.0</b></div>
+    <div><span>distance</span><b id="st-dist">0 u</b></div>
+    <div><span>near misses</span><b id="st-near">0</b></div>
+    <div><span>contacts</span><b id="st-coll">0</b></div>
+    <div><span>mean |a|</span><b id="st-energy">0.000</b></div>
+    <div><span>seed</span><b id="st-seed">—</b></div>
+    <div><span>neurons</span><b id="st-neurons">300</b></div>
+    <div><span>obstacles</span><b id="st-obstacles">0</b></div>
+  </div>
+  <div id="controls">
+    <div class="row">
+      <button id="btn-pause">PAUSE</button>
+      <button id="btn-brain">NEW BRAIN</button>
+      <button id="btn-perturb">PERTURB</button>
+    </div>
+    <div class="row">
+      <button id="btn-box">+ BOX</button>
+      <button id="btn-cyl">+ CYLINDER</button>
+      <button id="btn-scatter">SCATTER</button>
+      <button id="btn-clear">CLEAR</button>
+    </div>
+    <div class="row">
+      <button id="btn-cam">CAM: FOLLOW</button>
+      <select id="sel-neurons">
+        <option value="100">100 neurons</option>
+        <option value="200">200 neurons</option>
+        <option value="300" selected>300 neurons</option>
+        <option value="400">400 neurons</option>
+      </select>
+    </div>
+    <label>speed <input id="sl-speed" type="range" min="40" max="200" value="100"></label>
+    <label>net gain <input id="sl-gain" type="range" min="0" max="200" value="100"></label>
+    <label>tau scale <input id="sl-tau" type="range" min="30" max="300" value="100"></label>
+  </div>
+  <div id="credit">Drag obstacles with the mouse. Original rebuild of the untrained-neuron e-puck demo from <b>@alexanderawolf</b>'s post quoted by <b>@chris_j_paxton</b>. Innate sensor priors + a sparse recurrent CTRNN near the edge of chaos. Nothing is trained.</div>
+</div>
+
+<script src="three.min.js"></script>
+<script src="brain.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
